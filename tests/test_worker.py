@@ -22,7 +22,6 @@ rapid_development = False
 
 
 class TestWorker(Worker):
-
     def __init__(self, sleep_duration=0, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.sleep_duration = sleep_duration
@@ -35,7 +34,8 @@ class TestWorker(Worker):
 class TestWorkers(unittest.TestCase):
     def setUp(self):
         self.configspace = CS.ConfigurationSpace(42)
-        self.configspace.add_hyperparameters([CS.UniformFloatHyperparameter('cont1', lower=0, upper=1)])
+        self.configspace.add_hyperparameters(
+            [CS.UniformFloatHyperparameter('cont1', lower=0, upper=1)])
 
         self.run_id = 'hpbandsterUnittestWorker'
 
@@ -59,7 +59,10 @@ class TestWorkers(unittest.TestCase):
         w = TestWorker(run_id='test')
 
         with tempfile.TemporaryDirectory() as working_directory:
-            self.assertRaises(RuntimeError, w.load_nameserver_credentials, working_directory, num_tries=1)
+            self.assertRaises(RuntimeError,
+                              w.load_nameserver_credentials,
+                              working_directory,
+                              num_tries=1)
 
     @unittest.skipIf(rapid_development, "test skipped to accelerate developing new tests")
     def test_Timeout(self):
@@ -120,7 +123,10 @@ class TestWorkers(unittest.TestCase):
                             configspace=self.configspace,
                             nameserver=ns_host,
                             nameserver_port=ns_port,
-                            min_budget=1, max_budget=3, eta=3, ping_interval=1)
+                            min_budget=1,
+                            max_budget=3,
+                            eta=3,
+                            ping_interval=1)
             opt.run(1, min_n_workers=3)
 
             # only one worker should be alive when the run is done
@@ -158,7 +164,10 @@ class TestWorkers(unittest.TestCase):
                                 configspace=self.configspace,
                                 nameserver=ns_host,
                                 nameserver_port=ns_port,
-                                min_budget=1, max_budget=3, eta=3, ping_interval=1)
+                                min_budget=1,
+                                max_budget=3,
+                                eta=3,
+                                ping_interval=1)
                 opt.run(1, min_n_workers=1)
 
                 opt.shutdown()

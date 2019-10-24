@@ -9,7 +9,6 @@ class LCNetWrapper(LCModel):
     """
         Wrapper around LC-Net
     """
-
     def __init__(self, max_num_epochs):
         self.max_num_epochs = max_num_epochs
         self.model = LCNet(sampling_method="sghmc",
@@ -20,7 +19,7 @@ class LCNetWrapper(LCModel):
                            n_iters=30000,
                            get_net=get_lc_net,
                            precondition=True)
-    
+
     def fit(self, times, losses, configs=None):
         """
             function to train the model on the observed data
@@ -117,4 +116,3 @@ class LCNetWrapper(LCModel):
                 
         """
         return self.predict_unseen(times, config)
-

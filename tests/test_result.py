@@ -11,16 +11,23 @@ import os.path
 
 
 class TestResult(unittest.TestCase):
-
     def test_init(self):
-        run_obj = Run(config_id=1, budget=2, loss=[3, 1], info={'loss': [3, 1]},
-                      time_stamps={'submitted': 0, 'started': 10}, error_logs=None)
+        run_obj = Run(config_id=1,
+                      budget=2,
+                      loss=[3, 1],
+                      info={'loss': [3, 1]},
+                      time_stamps={
+                          'submitted': 0,
+                          'started': 10
+                      },
+                      error_logs=None)
 
         self.assertEqual(run_obj.config_id, 1)
         self.assertEqual(run_obj.budget, 2)
         self.assertListEqual(run_obj.loss, [3, 1])
         self.assertListEqual(run_obj.info['loss'], [3, 1])
         self.assertDictEqual(run_obj.time_stamps, {'submitted': 0, 'started': 10})
+
 
 class TestExtraction(unittest.TestCase):
     def test_extract_HBS_learning_curves(self):
@@ -32,6 +39,7 @@ class TestExtraction(unittest.TestCase):
 
         self.assertListEqual(extract_HBS_learning_curves([run_1, run_2, run_3, run_4]),
                              [[(1, 7), (6, 3), (10, 1)]])
+
 
 class TestJsonResultLogger(unittest.TestCase):
     def test_write_new_config(self):
@@ -53,6 +61,7 @@ class TestJsonResultLogger(unittest.TestCase):
                 data = fh.read()
                 data = data.rstrip()
                 self.assertEqual(data, r'["1", {"test": 1}, {"test": "test"}]')
+
 
 """
 class TestResultObject(unittest.TestCase):

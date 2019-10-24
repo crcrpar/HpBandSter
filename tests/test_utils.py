@@ -13,7 +13,6 @@ rapid_development = False
 
 
 class TestUtils(unittest.TestCase):
-
     def test_local_nameserver_1(self):
         host, port = utils.start_local_nameserver(host=None, nic_name=None)
         self.assertEqual(host, 'localhost')
@@ -31,6 +30,7 @@ class TestUtils(unittest.TestCase):
         ns_host, ns_port = ns.start()
         self.assertEqual(ns.host, '127.0.0.1')
         ns.shutdown()
+
 
 if __name__ == '__main__':
     unittest.main()

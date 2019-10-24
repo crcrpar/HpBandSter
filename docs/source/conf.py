@@ -30,7 +30,6 @@ version = ''
 # The full version, including alpha/beta/rc tags
 release = ''
 
-
 # -- General configuration ---------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -54,21 +53,19 @@ extensions = [
 # add __init__ docstring to docs
 autoclass_content = 'both'
 
-
 from sphinx_gallery.sorting import ExampleTitleSortKey
 # Now to declare your project structure, we add a configuration dictionary
 # for Sphinx-Gallery. The examples directory ../examples is declared
 # with a relative path from the conf.py file location:
 sphinx_gallery_conf = {
-                        # path to your examples scripts
-                        'examples_dirs': '../../hpbandster/examples',
-                        # path where to save gallery generated examples
-                        'gallery_dirs': 'auto_examples',
-                        # ignore files with this pattern.
-                        'ignore_pattern': '__init__\.py|.*\.sh',
-                        'within_subsection_order': ExampleTitleSortKey,
-                      }
-
+    # path to your examples scripts
+    'examples_dirs': '../../hpbandster/examples',
+    # path where to save gallery generated examples
+    'gallery_dirs': 'auto_examples',
+    # ignore files with this pattern.
+    'ignore_pattern': '__init__\.py|.*\.sh',
+    'within_subsection_order': ExampleTitleSortKey,
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -96,7 +93,6 @@ exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
-
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -129,12 +125,10 @@ html_sidebars = {'**': ['localtoc.html']}
 #
 # html_sidebars = {}
 
-
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'HpBandSterdoc'
-
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -160,20 +154,14 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'HpBandSter.tex', 'HpBandSter Documentation',
-     'Stefan Falkner', 'manual'),
+    (master_doc, 'HpBandSter.tex', 'HpBandSter Documentation', 'Stefan Falkner', 'manual'),
 ]
-
 
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'hpbandster', 'HpBandSter Documentation',
-     [author], 1)
-]
-
+man_pages = [(master_doc, 'hpbandster', 'HpBandSter Documentation', [author], 1)]
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -181,10 +169,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'HpBandSter', 'HpBandSter Documentation',
-     author, 'HpBandSter', 'One line description of project.',
-     'Miscellaneous'),
+    (master_doc, 'HpBandSter', 'HpBandSter Documentation', author, 'HpBandSter',
+     'One line description of project.', 'Miscellaneous'),
 ]
-
 
 # -- Extension configuration -------------------------------------------------

@@ -15,11 +15,20 @@ from hpbandster.optimizers.config_generators.lcnet import LCNetWrapper as CG_LCN
 
 
 class LCNet(Master):
-    def __init__(self, configspace=None,
-                 eta=3, min_budget=0.01, max_budget=1,
-                 min_points_in_model=None, top_n_percent=15,
-                 num_samples=64, random_fraction=1 / 3, bandwidth_factor=3,
-                 min_bandwidth=1e-3, n_points=200, n_candidates=1024, delta=1,
+    def __init__(self,
+                 configspace=None,
+                 eta=3,
+                 min_budget=0.01,
+                 max_budget=1,
+                 min_points_in_model=None,
+                 top_n_percent=15,
+                 num_samples=64,
+                 random_fraction=1 / 3,
+                 bandwidth_factor=3,
+                 min_bandwidth=1e-3,
+                 n_points=200,
+                 n_candidates=1024,
+                 delta=1,
                  **kwargs):
         """
 
@@ -79,7 +88,8 @@ class LCNet(Master):
 
         # precompute some HB stuff
         self.max_SH_iter = -int(np.log(min_budget / max_budget) / np.log(eta)) + 1
-        self.budgets = max_budget * np.power(eta, -np.linspace(self.max_SH_iter - 1, 0, self.max_SH_iter))
+        self.budgets = max_budget * np.power(
+            eta, -np.linspace(self.max_SH_iter - 1, 0, self.max_SH_iter))
 
         self.config.update({
             'eta': eta,
@@ -114,8 +124,11 @@ class LCNet(Master):
         # number of 'SH rungs'
         s = self.max_SH_iter - 1 - (iteration % self.max_SH_iter)
         # number of configurations in that bracket
-        n0 = int(np.floor((self.max_SH_iter) / (s + 1)) * self.eta ** s)
-        ns = [max(int(n0 * (self.eta ** (-i))), 1) for i in range(s + 1)]
+        n0 = int(np.floor((self.max_SH_iter) / (s + 1)) * self.eta**s)
+        ns = [max(int(n0 * (self.eta**(-i))), 1) for i in range(s + 1)]
 
-        return (SuccessiveHalving(HPB_iter=iteration, num_configs=ns, budgets=self.budgets[(-s - 1):],
-                                  config_sampler=self.config_generator.get_config, **iteration_kwargs))
+        return (SuccessiveHalving(HPB_iter=iteration,
+                                  num_configs=ns,
+                                  budgets=self.budgets[(-s - 1):],
+                                  config_sampler=self.config_generator.get_config,
+                                  **iteration_kwargs))
