@@ -80,11 +80,14 @@ class LCNetWrapper(base_config_generator):
         if not self.is_trained:
             c = self.config_space.sample_configuration().get_array()
         else:
-            candidates = np.array([self.config_space.sample_configuration().get_array()
-                                   for _ in range(self.n_candidates)])
+            candidates = np.array([
+                self.config_space.sample_configuration().get_array()
+                for _ in range(self.n_candidates)
+            ])
 
             # We are only interested on the asymptotic value
-            projected_candidates = np.concatenate((candidates, np.ones([self.n_candidates, 1])), axis=1)
+            projected_candidates = np.concatenate((candidates, np.ones([self.n_candidates, 1])),
+                                                  axis=1)
 
             # Compute the upper confidence bound of the function at the asymptote
             m, v = self.model.predict(projected_candidates)
